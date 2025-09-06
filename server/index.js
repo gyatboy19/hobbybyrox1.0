@@ -3,7 +3,7 @@ import uploadRoute from "./upload-to-github.js";
 
 const app = express();
 
-// Allow cross-origin requests (so GitHub Pages can call Render)
+// ----- CORS (GitHub Pages -> Render) -----
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
@@ -12,13 +12,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// Simple health check (also helps warm up the free instance)
+// ----- Health checks -----
 app.get("/health", (req, res) => {
   res.json({ ok: true, ts: Date.now() });
 });
 
-// Upload routes (/api/upload-image, /api/save-products)
-// Quick env check (does NOT expose the token)
 app.get("/health/env", (req, res) => {
   res.json({
     owner: process.env.GITHUB_OWNER,
@@ -28,6 +26,8 @@ app.get("/health/env", (req, res) => {
     hasToken: !!process.env.GITHUB_TOKEN
   });
 });
+
+// ----- Upload APIs (/api/upload-image, /api/save-products) -----
 app.use(uploadRoute);
 
 const PORT = process.env.PORT || 3000;

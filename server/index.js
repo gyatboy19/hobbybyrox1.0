@@ -18,6 +18,16 @@ app.get("/health", (req, res) => {
 });
 
 // Upload routes (/api/upload-image, /api/save-products)
+// Quick env check (does NOT expose the token)
+app.get("/health/env", (req, res) => {
+  res.json({
+    owner: process.env.GITHUB_OWNER,
+    repo: process.env.GITHUB_REPO,
+    branch: process.env.GITHUB_BRANCH,
+    mediaDir: process.env.MEDIA_DIR,
+    hasToken: !!process.env.GITHUB_TOKEN
+  });
+});
 app.use(uploadRoute);
 
 const PORT = process.env.PORT || 3000;

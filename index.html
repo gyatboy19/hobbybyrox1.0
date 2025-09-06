@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#FFF9F5">
+  <title>HobbyByRox — Winkel & Inspiratie</title>
+  <meta name="description" content="HobbyByRox kopen en inspiratie opdoen. Handgemaakte boeketten, tafeldecoratie en seizoensstukken." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌷</text></svg>">
+  <link rel="stylesheet" href="merged.css">
+</head>
+<body>
+  <div class="notification" id="notification">Toegevoegd aan winkelwagen 😊</div>
+  <div class="topbar">🚚 Bezorging via <strong>DHL</strong> & <strong>PostNL</strong> · 📦 <strong>Ophalen (voorkeur)</strong> in Drachten · 🌷 Handgebonden & duurzaam</div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="HobbyByRox Home">🌷 <span>HobbyByRox</span></a>
+      <nav class="nav-links">
+        <a href="#shop">Winkel</a>
+        <a href="#inspiratie">Inspiratie</a>
+        <a href="#over">Over</a>
+        <a href="#contact" class="btn ghost">Contact</a>
+        <a href="#" class="btn cart" id="cartBtn" aria-label="Winkelwagen"><span class="cart-count" id="cartCount" aria-live="polite">0</span> 🛒</a>
+        <a href="#shop" class="btn primary">Shop nu</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="section hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge">Vers • Handgebonden</span>
+        <h1>Bloemstukken kopen & inspiratie opdoen</h1>
+        <p class="lead">Ontdek onze handgemaakte boeketten en tafelstukken, perfect voor elke gelegenheid. Bestel direct of laat je inspireren door onze collectie.</p>
+
+        <!-- FILTER CHIPS -->
+        <div class="filters" aria-label="Filter producten op categorie" role="tablist">
+          <span class="chip active" role="tab" aria-selected="true" data-filter="all" tabindex="0">Alle</span>
+          <span class="chip" role="tab" aria-selected="false" data-filter="seizoensboeketten" tabindex="0">Seizoensboeketten</span>
+          <span class="chip" role="tab" aria-selected="false" data-filter="tafelstuk" tabindex="0">Tafelstuk</span>
+          <span class="chip" role="tab" aria-selected="false" data-filter="bruiloft" tabindex="0">Bruiloft</span>
+          <span class="chip" role="tab" aria-selected="false" data-filter="rouw" tabindex="0">Rouw</span>
+        </div>
+
+        <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn primary" href="#shop">Shop bloemen →</a>
+          <a class="btn ghost" href="#inspiratie">Bekijk inspiratie</a>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Hoofdafbeelding">
+        <img id="heroImage" src="06708352-7db0-4f62-a9c8-d9665966d70e.png" alt="Hoofdafbeelding HobbyByRox" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section id="shop" class="section">
+    <div class="container">
+      <h2 style="margin:0 0 6px; font-size:32px; letter-spacing:-.02em">Winkel</h2>
+      <p class="lead" style="margin-top:0">Huidige vooraad.</p>
+      <div class="grid" style="margin-top:18px" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- INSPIRATIE -->
+  <section id="inspiratie" class="section" style="background:var(--surface)">
+    <div class="container">
+      <h2 style="margin:0 0 6px; font-size:32px; letter-spacing:-.02em">Inspiratie</h2>
+      <p class="lead" style="margin-top:0">Ideeën voor bruiloft, tafelstyling en cadeau.</p>
+      <div class="grid" style="margin-top:18px" id="inspirationGrid">
+        <figure class="card"><img id="inspirationImage1" loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1490173032704-909f3abbf45e?q=80&w=1200&auto=format&fit=crop" alt="Pastel tafeldecoratie" /><figcaption class="card-body">Pastel tafeldecoratie</figcaption></figure>
+        <figure class="card"><img id="inspirationImage2" loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1479065476818-424362c3a854?q=80&w=1200&auto=format&fit=crop" alt="Boeket met veldbloemen" /><figcaption class="card-body">Veldbloemen</figcaption></figure>
+        <figure class="card"><img id="inspirationImage3" loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1441186235366-763343f7c9f1?q=80&w=1200&auto=format&fit=crop" alt="Ceremonie boog" /><figcaption class="card-body">Ceremonie-boog</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section">
+    <div class="container">
+      <h2 style="margin:0 0 6px; font-size:32px; letter-spacing:-.02em">Reviews</h2>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr); margin-top:18px">
+        <blockquote class="card"><div class="card-body"><p style="margin:0 0 .5rem">“Prachtig tafelstuk, precies op tijd!”</p><footer style="color:var(--muted);font-size:.9rem">— Sanne ★★★★★</footer></div></blockquote>
+        <blockquote class="card"><div class="card-body"><p style="margin:0 0 .5rem">“Hele fijne communicatie en maatwerk.”</p><footer style="color:var(--muted);font-size:.9rem">— Amir ★★★★★</footer></div></blockquote>
+        <blockquote class="card"><div class="card-body"><p style="margin:0 0 .5rem">“Onze bruiloftsbloemen waren magisch.”</p><footer style="color:var(--muted);font-size:.9rem">— Noor ★★★★★</footer></div></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVER -->
+  <section id="over" class="section">
+  <div class="container" style="text-align:center; margin:0 auto; max-width: 900px;">
+    <h2 style="margin:0 0 10px; font-size:32px; letter-spacing:-.02em">🌷 Over HobbyByRox 🌷</h2>
+    <p class="lead" style="margin:0 auto 20px; max-width: 760px;">
+      Met liefde gemaakt in Drachten. Ik werk met verse seizoensbloemen en duurzame materialen. Bestellen kan online of via een berichtje. Maatwerk is altijd mogelijk.
+    </p>
+
+    <div style="display:inline-block; text-align:left; padding:18px 22px; border:1px solid #eadfdc; border-radius:12px; background:#fff7f5;">
+      <ul style="list-style:none; padding:0; margin:0;">
+        <li style="margin: 8px 0;"><strong>📅 Sinds:</strong> 2024</li>
+        <li style="margin: 8px 0;"><strong>🚚 Levering:</strong> Regio Drachten</li>
+        <li style="margin: 8px 0;"><strong>💐 Specialiteit:</strong> Seizoens- &amp; bruiloftswerk</li>
+        <li style="margin: 8px 0;"><strong>📞 Contact:</strong> WhatsApp &amp; e-mail</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section" style="background:var(--surface)">
+    <div class="container two-col">
+      <div>
+        <h3 style="margin-top:0">Contact</h3>
+        <p class="lead">Bestellen of maatwerk bespreken? Stuur een berichtje — ik reageer snel.</p>
+        <ul style="list-style:none; padding:0; margin: 10px 0 0; color:var(--muted)">
+          <li>📧 <a href="mailto:hallo@HobbyByRox.nl">hallo@HobbyByRox.nl</a></li>
+          <li>📞 <a href="tel:+31612345678">+31 6 1234 5678</a></li>
+          <li>📍 Drachten</li>
+        </ul>
+      </div>
+      <form id="contactForm" aria-label="Contactformulier">
+        <div>
+          <label for="name">Naam</label>
+          <input id="name" name="name" placeholder="Je naam" autocomplete="name" required />
+        </div>
+        <div>
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" placeholder="jij@example.com" autocomplete="email" required />
+        </div>
+        <div class="full">
+          <label for="message">Bericht</label>
+          <textarea id="message" name="message" placeholder="Waar kan ik mee helpen?" required></textarea>
+        </div>
+        <div class="full">
+          <button class="btn primary" type="submit">Verstuur</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT SUCCESS MODAL -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="modal-close" id="modalClose" aria-label="Sluit melding">&times;</span>
+      <p>Bedankt! We nemen snel contact op.</p>
+    </div>
+  </div>
+
+  <!-- CART MODAL -->
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <span class="modal-close" id="cartModalClose" aria-label="Sluit winkelwagen modal">&times;</span>
+      <h2 style="margin:0 0 6px; font-size:24px; letter-spacing:-.02em">Winkelwagen</h2>
+      <div id="cartItems"></div>
+      <p id="cartTotal" style="font-weight:600; margin-top:12px">Totaal: € 0,00</p>
+      <button class="btn primary" id="checkoutBtn" style="margin-top:12px">Afrekenen</button>
+    </div>
+  </div>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <span class="modal-close" id="productModalClose" aria-label="Sluit product modal">&times;</span>
+      <div class="product-thumbnails" id="productThumbnails"></div>
+      <div class="product-details">
+        <div class="slider" id="productSlider"></div>
+        <div id="productDetails"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN LOGIN POPUP -->
+  <div class="modal" id="adminLoginModal">
+    <div class="modal-content" style="max-width:420px">
+      <span class="modal-close" id="adminLoginClose" aria-label="Sluit beheer login">&times;</span>
+      <h2 style="margin:0 0 8px; font-size:22px;">Beheer Login</h2>
+      <p class="lead" style="margin-top:0">Log in om het beheer te openen.</p>
+      <div class="form-group">
+        <label for="adminLoginUser">Gebruikersnaam</label>
+        <input id="adminLoginUser" type="text" placeholder="admin" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="adminLoginPass">Wachtwoord</label>
+        <input id="adminLoginPass" type="password" placeholder="wachtwoord" autocomplete="current-password">
+      </div>
+      <button class="btn primary" id="adminLoginBtn">Inloggen & openen</button>
+      <p id="adminLoginError" class="error" style="margin-top:8px"></p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <h2 style="margin:0 0 6px; font-size:32px; letter-spacing:-.02em">Veelgestelde vragen</h2>
+      <details class="card"><summary class="card-body">Leveren jullie dezelfde dag?</summary><div class="card-body">In Drachten vaak wel. Stuur even een appje of mail.</div></details>
+      <details class="card"><summary class="card-body">Kan ik een kleurthema kiezen?</summary><div class="card-body">Ja, geef je voorkeur door en we stemmen af.</div></details>
+      <details class="card"><summary class="card-body">Bezorggebied & kosten</summary><div class="card-body">Drachten €4,95 via DHL/PostNL · Ophalen (voorkeur) gratis · Omliggende plaatsen in overleg.</div></details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container foot">
+      <p>© <span id="year"></span> HobbyByRox. Alle rechten voorbehouden.</p>
+      <nav style="display:flex; gap:12px">
+        <a href="#">Privacy</a>
+        <a href="#">Algemene voorwaarden</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <!-- beheer link triggers popup -->
+        <a href="#admin" id="adminFooterLink" aria-label="Open beheer" onclick="openAdminModal(); return false;">beheer</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="merged.js"></script>
+</section>
+</body>
+</html>

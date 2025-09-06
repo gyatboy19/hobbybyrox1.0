@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: hobbybyroxx-upload
+    env: node
+    rootDir: server
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GITHUB_OWNER
+        value: gyatboy19
+      - key: GITHUB_REPO
+        value: hobbybyroxx
+      - key: GITHUB_BRANCH
+        value: main
+      - key: MEDIA_DIR
+        value: public/uploads

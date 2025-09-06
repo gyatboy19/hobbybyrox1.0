@@ -1,0 +1,13 @@
+{
+  "name": "hobbybyroxx-upload-server",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "octokit": "^4.0.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "builds": [{ "src": "server/index.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "server/index.js" }],
+  "env": {
+    "GITHUB_OWNER": "gyatboy19",
+    "GITHUB_REPO": "hobbybyrox1.0",
+    "GITHUB_BRANCH": "main",
+    "MEDIA_DIR": "public/uploads"
+  }
+}

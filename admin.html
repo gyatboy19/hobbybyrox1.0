@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <link rel="stylesheet" href="merged.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Beheer — Bloemstukjes</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🛠️</text></svg>">
+  
+</head>
+<body>
+
+<!-- Global default image setting -->
+<section id="default-image-settings" style="padding:12px; border:1px solid #eee; margin:12px 0; border-radius:8px;">
+  <h3>Global Default Image</h3>
+  <p>This image will be used wherever a product/hero lacks its own image.</p>
+  <label for="defaultImageUrl">Default Image URL</label><br/>
+  <input id="defaultImageUrl" type="url" placeholder="https://.../hobby.png" style="width:100%; max-width:520px;" />
+  <button id="saveDefaultImageBtn" type="button">Save Default</button>
+  <img id="defaultImagePreview" alt="Default preview" style="display:block; margin-top:8px; max-width:240px;" />
+</section>
+
+  <div class="toast" id="toast">Opgeslagen ✅</div>
+
+  <header>
+    <div class="container nav">
+      <div style="display:flex;align-items:center;gap:.6rem;font-weight:800">🛠️ Beheer <span class="pill">Bloemstukjes</span></div>
+      <div style="display:flex;gap:8px">
+        <a class="btn" href="index.html">← Terug naar site</a>
+        <button class="btn" id="logoutBtn">Uitloggen</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO SLIDESHOW -->
+    <section class="section">
+      <h2 style="margin:0 0 6px;font-size:28px">Hero-slideshow</h2>
+      <p class="subtitle">Upload meerdere afbeeldingen of gebruik externe viewer/HTML/BBCode links (we halen de echte afbeelding eruit).</p>
+      <div class="card">
+        <div class="card-body">
+          <div id="heroSlidesList" class="list"></div>
+
+          <div class="row">
+            <label>Upload afbeelding
+              <input type="file" id="heroNewImage" accept="image/jpeg,image/png" />
+            </label>
+
+            <label>OF URL/Embed (https://, HTML, BBCode)
+              <input type="url" id="heroNewUrl" placeholder="Plak viewer/HTML/BBCode of directe URL" />
+              <!-- live preview -->
+              <img id="heroUrlPreview"
+                   alt="Voorbeeld"
+                   style="margin-top:8px;width:140px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border)" />
+            </label>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <button class="btn primary" id="heroAddBtn">Toevoegen</button>
+            <button class="btn ghost" id="heroResetBtn">Reset naar standaard</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section">
+      <h2 style="margin:0 0 6px;font-size:28px">Producten</h2>
+      <p class="subtitle">Je kunt een URL/Embed plakken (heeft voorrang) of een bestand uploaden. We comprimeren uploads om opslag te besparen.</p>
+      <div class="grid">
+        <!-- New product -->
+        <div class="card">
+          <div class="card-body">
+            <h3 style="margin:0 0 6px">Nieuw product</h3>
+            <label>Naam<input id="npName" /></label>
+            <label>Beschrijving<textarea id="npDesc"></textarea></label>
+            <div class="row">
+              <label>Prijs (€)<input id="npPrice" type="number" step="0.01" min="0" /></label>
+              <label>Categorie
+                <select id="npCat">
+                  <option value="seizoensboeketten">Seizoensboeketten</option>
+                  <option value="tafelstuk">Tafelstuk</option>
+                  <option value="bruiloft">Bruiloft</option>
+                  <option value="rouw">Rouw</option>
+                </select>
+              </label>
+            </div>
+            <label>Extra info<input id="npExtra" placeholder="Bijv. Maat S/M/L" /></label>
+
+            <div class="row">
+              <label>Primaire afbeelding (upload)
+                <input id="npImg1" type="file" accept="image/*" />
+              </label>
+              <label>Primaire afbeelding URL/Embed
+                <input id="npUrl1" type="url" placeholder="Plak viewer/HTML/BBCode of directe URL" />
+                <img id="npPreview1"
+                     alt="Voorbeeld"
+                     style="margin-top:8px;width:140px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border)" />
+              </label>
+            </div>
+            <div class="row">
+              <label>Secundaire afbeelding (upload)
+                <input id="npImg2" type="file" accept="image/*" />
+              </label>
+              <label>Secundaire afbeelding URL/Embed
+                <input id="npUrl2" type="url" placeholder="Plak viewer/HTML/BBCode of directe URL" />
+                <img id="npPreview2"
+                     alt="Voorbeeld"
+                     style="margin-top:8px;width:140px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border)" />
+              </label>
+            </div>
+            <div class="row">
+              <label>Derde afbeelding (upload)
+                <input id="npImg3" type="file" accept="image/*" />
+              </label>
+              <label>Derde afbeelding URL/Embed
+                <input id="npUrl3" type="url" placeholder="Plak viewer/HTML/BBCode of directe URL" />
+                <img id="npPreview3"
+                     alt="Voorbeeld"
+                     style="margin-top:8px;width:140px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border)" />
+              </label>
+            </div>
+
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn primary" id="addProductBtn">Toevoegen</button>
+              <button class="btn ghost" id="resetNewFormBtn" type="button">Leegmaken</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Existing products -->
+        <div class="card">
+          <div class="card-body">
+            <h3 style="margin:0 0 6px">Bestaande producten</h3>
+            <div id="productList" class="list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSPIRATION -->
+    <section class="section">
+      <h2 style="margin:0 0 6px;font-size:28px">Inspiratie-afbeeldingen</h2>
+      <p class="subtitle">Upload een afbeelding of plak een URL/Embed (viewer/HTML/BBCode). URL/Embed heeft voorrang. Je ziet direct een voorbeeld.</p>
+
+      <div class="grid">
+        <!-- Kaart 1 -->
+        <div class="card">
+          <img id="inspPrev1" src="" alt="Voorbeeld 1">
+          <div class="card-body">
+            <div class="row">
+              <label>Upload afbeelding
+                <input id="inspFile1" type="file" accept="image/*">
+              </label>
+              <label>URL/Embed
+                <input id="inspUrl1" type="url" placeholder="Plak viewer/HTML/BBCode of directe URL">
+                <img id="inspUrlPrev1" alt="Live preview"
+                     style="margin-top:8px;width:140px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border)">
+              </label>
+            </div>
+            <div style="margin-top:10px">
+              <button class="btn primary" data-save-insp="1">Opslaan</button>
+              <button class="btn ghost" data-reset-insp="1">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kaart 2 -->
+        <div class="card">
+          <img id="inspPrev2" src="" alt="Voorbeeld 2">
+          <div class="card-body">
+            <div class="row">
+              <label>Upload afbeelding
+                <input id="inspFile2" type="file" accept="image/*">
+              </label>
+              <label>URL/Embed
+                <input id="inspUrl2" type="url" placeholder="Plak viewer/HTML/BBCode of directe URL">
+                <img id="inspUrlPrev2" alt="Live preview"
+                     style="margin-top:8px;width:140px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border)">
+              </label>
+            </div>
+            <div style="margin-top:10px">
+              <button class="btn primary" data-save-insp="2">Opslaan</button>
+              <button class="btn ghost" data-reset-insp="2">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kaart 3 -->
+        <div class="card">
+          <img id="inspPrev3" src="" alt="Voorbeeld 3">
+          <div class="card-body">
+            <div class="row">
+              <label>Upload afbeelding
+                <input id="inspFile3" type="file" accept="image/*">
+              </label>
+              <label>URL/Embed
+                <input id="inspUrl3" type="url" placeholder="Plak viewer/HTML/BBCode of directe URL">
+                <img id="inspUrlPrev3" alt="Live preview"
+                     style="margin-top:8px;width:140px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border)">
+              </label>
+            </div>
+            <div style="margin-top:10px">
+              <button class="btn primary" data-save-insp="3">Opslaan</button>
+              <button class="btn ghost" data-reset-insp="3">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPORT / EXPORT -->
+    <section class="section">
+      <h2 style="margin:0 0 6px;font-size:28px">Catalogus Import/Export (JSON)</h2>
+      <p class="subtitle">Maak een backup of vervang in één keer alle producten.</p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-body">
+            <h3 style="margin:0 0 6px">Exporteren</h3>
+            <p class="subtitle">Download de huidige catalogus als <code>.json</code>-bestand.</p>
+            <button class="btn primary" id="exportBtn">Exporteren</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3 style="margin:0 0 6px">Importeren</h3>
+            <p class="subtitle">Kies een <code>.json</code>-bestand of plak JSON hieronder. Vervangt de hele catalogus.</p>
+            <input type="file" id="importFile" accept="application/json" />
+            <div style="margin-top:8px"></div>
+            <textarea id="importText" class="mono" rows="8" placeholder='{"123":{"name":"Boeket ...","price":29.95,"description":"...","category":"seizoensboeketten","images":["data:... of https://..."],"thumbnail":"...","extra":"Maat: S/M/L"}, ...}'></textarea>
+            <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+              <button class="btn primary" id="importApplyBtn">Importeren (plakken)</button>
+              <button class="btn danger" id="importReplaceBtn">Importeren (bestand)</button>
+              <button class="btn ghost" id="downloadTemplateBtn">Voorbeeld JSON</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- EDIT PRODUCT MODAL -->
+  <div class="modal" id="editProductModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+      <span class="modal-close" id="editClose" aria-label="Sluiten">&times;</span>
+      <h3 id="editTitle" style="margin:0 0 8px">Product bewerken</h3>
+      <p class="subtitle" style="margin-top:0">Je kunt een URL/Embed invullen of een nieuw bestand kiezen. URL heeft voorrang.</p>
+
+      <div class="row">
+        <label>Naam<input id="epName"></label>
+        <label>Prijs (€)<input id="epPrice" type="number" step="0.01" min="0"></label>
+      </div>
+      <label>Beschrijving<textarea id="epDesc"></textarea></label>
+      <div class="row">
+        <label>Categorie
+          <select id="epCat">
+            <option value="seizoensboeketten">Seizoensboeketten</option>
+            <option value="tafelstuk">Tafelstuk</option>
+            <option value="bruiloft">Bruiloft</option>
+            <option value="rouw">Rouw</option>
+          </select>
+        </label>
+        <label>Extra info<input id="epExtra" placeholder="Bijv. Maat S/M/L"></label>
+      </div>
+
+      <div class="row">
+        <label>Primaire afbeelding (upload)
+          <input id="epImg1" type="file" accept="image/*">
+        </label>
+        <label>Primaire afbeelding URL/Embed
+          <input id="epUrl1" type="url" placeholder="Plak viewer/HTML/BBCode of directe URL">
+        </label>
+      </div>
+      <div class="row">
+        <label>Secundaire afbeelding (upload)
+          <input id="epImg2" type="file" accept="image/*">
+        </label>
+        <label>Secundaire afbeelding URL/Embed
+          <input id="epUrl2" type="url" placeholder="Plak viewer/HTML/BBCode of directe URL">
+        </label>
+      </div>
+      <div class="row">
+        <label>Derde afbeelding (upload)
+          <input id="epImg3" type="file" accept="image/*">
+        </label>
+        <label>Derde afbeelding URL/Embed
+          <input id="epUrl3" type="url" placeholder="Plak viewer/HTML/BBCode of directe URL">
+        </label>
+      </div>
+
+      <div class="thumbs">
+        <img id="epPrev1" alt="Voorbeeld 1">
+        <img id="epPrev2" alt="Voorbeeld 2">
+        <img id="epPrev3" alt="Voorbeeld 3">
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+        <button class="btn primary" id="epSaveBtn">Opslaan</button>
+        <button class="btn ghost" id="epResetImagesBtn" type="button">Afbeeldingen resetten</button>
+        <button class="btn danger" id="epDeleteBtn" type="button">Verwijderen</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

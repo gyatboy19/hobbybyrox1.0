@@ -11,7 +11,7 @@
 
 // ==================== Persistent Upload Helper (Git-backed) ====================
 // Configure this if your upload server is on a different origin. If deployed next to the site, leave empty.
-const UPLOAD_BASE = ""; // e.g. "https://hobbybyrox-upload.onrender.com"
+const UPLOAD_BASE = "https://hobbybyrox1-0.onrender.com"; // e.g. "https://hobbybyrox-upload.onrender.com"
 
 async function uploadViaApi(file){
   const fd = new FormData();

@@ -1,0 +1,74 @@
+{
+  "1": {
+    "name": "Boeket Lente Zacht",
+    "description": "Fris pastel met tulp en ranonkel.",
+    "price": 29.95,
+    "category": "seizoensboeketten",
+    "images": [
+      "https://i.ibb.co/zTspn9QG/hobby.png",
+      "https://i.ibb.co/zTspn9QG/hobby.png"
+    ],
+    "thumbnail": "https://i.ibb.co/zTspn9QG/hobby.png",
+    "extra": "Maat: S/M/L"
+  },
+  "2": {
+    "name": "Tafelstuk Groen",
+    "description": "Eucalyptus, roos en seizoensgroen.",
+    "price": 39.95,
+    "category": "tafelstuk",
+    "images": [
+      "https://i.ibb.co/zTspn9QG/hobby.png",
+      "https://i.ibb.co/zTspn9QG/hobby.png"
+    ],
+    "thumbnail": "https://i.ibb.co/zTspn9QG/hobby.png",
+    "extra": "Levertijd: 1-2 dagen"
+  },
+  "3": {
+    "name": "Bruiloftsboeket Klassiek",
+    "description": "Witte roos met zachte accenten.",
+    "price": 89,
+    "category": "bruiloft",
+    "images": [
+      "https://i.ibb.co/zTspn9QG/hobby.png",
+      "https://i.ibb.co/zTspn9QG/hobby.png"
+    ],
+    "thumbnail": "https://i.ibb.co/zTspn9QG/hobby.png",
+    "extra": "Op maat"
+  },
+  "4": {
+    "name": "Seizoensboeket Vrolijk",
+    "description": "Kleurige mix, elke week anders.",
+    "price": 24.5,
+    "category": "seizoensboeketten",
+    "images": [
+      "https://i.ibb.co/zTspn9QG/hobby.png",
+      "https://i.ibb.co/zTspn9QG/hobby.png"
+    ],
+    "thumbnail": "https://i.ibb.co/zTspn9QG/hobby.png",
+    "extra": "Abonnement"
+  },
+  "5": {
+    "name": "Rouwstuk Eerbetoon",
+    "description": "Met liefde samengesteld, volledig naar wens.",
+    "price": 50,
+    "category": "rouw",
+    "images": [
+      "https://i.ibb.co/zTspn9QG/hobby.png",
+      "https://i.ibb.co/zTspn9QG/hobby.png"
+    ],
+    "thumbnail": "https://i.ibb.co/zTspn9QG/hobby.png",
+    "extra": "Persoonlijk"
+  },
+  "6": {
+    "name": "Droogboeket Aards",
+    "description": "Aardse tinten en lange houdbaarheid.",
+    "price": 34.95,
+    "category": "seizoensboeketten",
+    "images": [
+      "https://i.ibb.co/zTspn9QG/hobby.png",
+      "https://i.ibb.co/zTspn9QG/hobby.png"
+    ],
+    "thumbnail": "https://i.ibb.co/zTspn9QG/hobby.png",
+    "extra": "Limited"
+  }
+}

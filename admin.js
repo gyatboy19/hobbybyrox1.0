@@ -8,13 +8,14 @@
 })();
 
 // ======================= Helpers ============================
-
 function $(id) { return document.getElementById(id); }
+
 function toast(msg) {
   var t = $("toast"); if (!t) return;
   t.textContent = msg; t.classList.add("show");
   setTimeout(function(){ t.classList.remove("show"); }, 1500);
 }
+
 function readTextFile(f){
   return new Promise((res, rej) => {
     if (!f) return rej(new Error("No file"));
@@ -24,6 +25,7 @@ function readTextFile(f){
     r.readAsText(f);
   });
 }
+
 function currency(v){ var n = isFinite(v) ? Number(v) : 0; return n.toFixed(2); }
 
 // -------- image url extraction/validation ----------
@@ -591,50 +593,97 @@ renderProducts();
   wire("epUrl2", "epPrev2");
 })();
 
-// ==================== Repo Sync Button ====================
-function getHeroSlides(){ try { return JSON.parse(localStorage.getItem("heroSlides")||"[]"); } catch(e){ return []; } }
-function getInspirationArray(){
-  return [
-    localStorage.getItem("inspirationImage1") || DEFAULT_INSP1,
-    localStorage.getItem("inspirationImage2") || DEFAULT_INSP2,
-    localStorage.getItem("inspirationImage3") || DEFAULT_INSP3
-  ];
+// ==================== Repo Sync Button (updated payload) ====================
+// Read JSON helpers
+function _readJSON(key, fallback) {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch(_) { return fallback; }
 }
-async function syncAllToRepo(){
-  try{
+
+// Prefer the admin's "heroSlides"; if someone ever stored under "heroImages", include those too.
+function _getHeroArray() {
+  const slides = _readJSON("heroSlides", []);
+  const images = _readJSON("heroImages", []);
+  const merged = [...slides, ...images].filter(Boolean);
+  return Array.from(new Set(merged));
+}
+
+// Only send inspiration that actually exists
+function _getInspirationArray() {
+  const a = localStorage.getItem("inspirationImage1") || "";
+  const b = localStorage.getItem("inspirationImage2") || "";
+  const c = localStorage.getItem("inspirationImage3") || "";
+  return [a, b, c].filter(Boolean);
+}
+
+async function syncAllToRepo() {
+  const btn = document.getElementById("syncToRepoBtn");
+  const setBusy = (b) => {
+    if (!btn) return;
+    btn.disabled = b;
+    btn.style.opacity = b ? "0.7" : "1";
+    btn.textContent = b ? "Syncing…" : "Sync to Repo";
+  };
+
+  try {
+    setBusy(true);
+
+    const products = _readJSON("products", {});   // object keyed by id
+    const hero = _getHeroArray();                 // ["uploads/…", "https://…", …]
+    const insp = _getInspirationArray();          // up to 3 strings
+
+    // Send both new and legacy keys so the server route stays compatible.
     const payload = {
-      products: JSON.parse(localStorage.getItem("products")||"{}"),
-      heroSlides: getHeroSlides(),
-      inspirationItems: getInspirationArray()
+      products,
+      heroImages: hero,        // new/preferred
+      heroSlides: hero,        // legacy
+      inspiration: insp,       // new/preferred
+      inspirationItems: insp   // legacy
     };
-    const res = await fetch((UPLOAD_BASE||"") + "/api/save-products", {
+
+    const res = await fetch((UPLOAD_BASE || "") + "/api/save-products", {
       method: "POST",
-      headers: { "Content-Type":"application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
-    const j = await res.json().catch(()=>null);
-    if(!res.ok || !j || !j.ok){ throw new Error((j && (j.error||j.details)) || "Sync failed"); }
-    alert("Synced to repo! Commit: " + (j.commit||"").slice(0,7));
-  }catch(e){
-    console.error(e);
-    alert("Sync to repo failed: " + (e && e.message || e));
+
+    let j = {};
+    try { j = await res.json(); } catch(_) {}
+
+    if (!res.ok || !j || j.ok !== true) {
+      throw new Error(j?.error || j?.details || "Sync failed");
+    }
+
+    alert("Synced to repo! Commit: " + String(j.commit || "").slice(0, 7));
+  } catch (e) {
+    console.error("[syncAllToRepo] error:", e);
+    alert("Sync to repo failed: " + (e?.message || e));
+  } finally {
+    setBusy(false);
   }
 }
-document.addEventListener("DOMContentLoaded", ()=>{
-  const btn = document.createElement("button");
-  btn.textContent = "Sync to Repo";
-  btn.style.position="fixed";
-  btn.style.right="16px";
-  btn.style.bottom="16px";
-  btn.style.zIndex="9999";
-  btn.style.padding="10px 14px";
-  btn.style.borderRadius="10px";
-  btn.style.border="none";
-  btn.style.boxShadow="0 2px 8px rgba(0,0,0,0.15)";
-  btn.style.cursor="pointer";
-  btn.style.background="#111";
-  btn.style.color="#fff";
-  btn.title="Write products & images metadata to data/*.json in the repo";
-  btn.addEventListener("click", syncAllToRepo);
-  document.body.appendChild(btn);
+
+// Create/attach the floating button (idempotent)
+document.addEventListener("DOMContentLoaded", () => {
+  let btn = document.getElementById("syncToRepoBtn");
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.id = "syncToRepoBtn";
+    btn.type = "button";
+    btn.textContent = "Sync to Repo";
+    btn.style.position = "fixed";
+    btn.style.right = "16px";
+    btn.style.bottom = "16px";
+    btn.style.zIndex = "9999";
+    btn.style.padding = "10px 14px";
+    btn.style.borderRadius = "10px";
+    btn.style.border = "none";
+    btn.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+    btn.style.cursor = "pointer";
+    btn.style.background = "#111";
+    btn.style.color = "#fff";
+    btn.title = "Write products & images metadata to /data/*.json in the repo";
+    document.body.appendChild(btn);
+  }
+  btn.onclick = syncAllToRepo;
 });
